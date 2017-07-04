@@ -33,3 +33,9 @@ completing its cycles.
 Some hypervisors try to compress or deduplicate memory. An attempt could be
 made to defeat such mechanisms by filling pages with random garbage instead of
 a simple `bzero`.
+
+## License
+
+Copyright 2017 SiteMinder.
+
+This software is released under the terms of the [MIT license](https://opensource.org/licenses/MIT).
