@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: eatcore
+  name: eatcore
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      k8s-app: eatcore
+  template:
+    metadata:
+      labels:
+        k8s-app: eatcore
+    spec:
+      containers:
+# sorry I have not pushed a public image anywhere yet
+        - image: 'your_repo_here'
+          imagePullPolicy: IfNotPresent
+          name: eatcore
+          args:
+          - '/usr/local/bin/eatcore'
+# exit if maximum increments reached successfully
+          - '-x'
+# every 60 seconds
+          - '-i 60'
+# allocate and touch 500MiB memory
+          - '-s 500'
+# up to 100 times
+          - '-n 100'
