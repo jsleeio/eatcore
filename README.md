@@ -26,13 +26,10 @@ to push one to your own repository and edit the definition to point at it.
 Additionally, if `-x` is not specified, `eatcore` will sleep indefinitely after
 completing its cycles.
 
-## Potential improvements
-
-### Defeat memory compression/deduplication regimes
-
-Some hypervisors try to compress or deduplicate memory. An attempt could be
-made to defeat such mechanisms by filling pages with random garbage instead of
-a simple `bzero`.
+If `-r` is specified, all memory allocated will be filled with data generated
+by `arc4random`, rather than merely being filled with zeroes. This should
+effectively prevent it being compressed or deduplicated by hypervisors or
+operating system kernels.
 
 ## License
 
