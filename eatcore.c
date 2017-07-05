@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef LINUX
+#include <bsd/stdlib.h>
+#endif
 #include <unistd.h>
 #include <strings.h>
+#include <time.h>
 #include <sys/time.h>
 #include <sys/types.h>
 
-#define logger(fmt, ...) fprintf(stderr, "eatcore: " fmt "\n", ## __VA_ARGS__)
+#define logger(fmt, ...) fprintf(stderr, "%ld eatcore: " fmt "\n", (long) time(NULL), ## __VA_ARGS__)
 
-#define VERSION "0.1.3"
+#define VERSION "0.2.0"
 
 struct context {
 	char** argv;
@@ -19,6 +23,7 @@ struct context {
   size_t max_increments;
   size_t current_increments;
   int    exit_finished;
+  int    random;
 };
 
 void set_defaults(struct context* ctx, int argc, char** argv) {
@@ -31,11 +36,12 @@ void set_defaults(struct context* ctx, int argc, char** argv) {
   ctx->max_increments     = 10;
   ctx->current_increments = 0;
   ctx->exit_finished      = 0;
+  ctx->random             = 0;
 }
 
 void parse_commandline(struct context* ctx) {
   int ch;
-	while ((ch = getopt(ctx->argc, ctx->argv, "hi:n:s:xv")) != -1) {
+	while ((ch = getopt(ctx->argc, ctx->argv, "hi:n:rs:xv")) != -1) {
 		switch (ch) {
 			case 's':
 				ctx->increment = (size_t) atoi(optarg) * 1048576;
@@ -46,6 +52,9 @@ void parse_commandline(struct context* ctx) {
       case 'n':
         ctx->max_increments = (size_t) atoi(optarg);
         break;
+      case 'r':
+        ctx->random = 1;
+        break;
       case 'x':
         ctx->exit_finished = 1;
         break;
@@ -54,7 +63,7 @@ void parse_commandline(struct context* ctx) {
         exit(0);
       case 'h':
       default:
-        logger("usage: eatcore [-i interval_in_seconds] [-s increment_in_bytes] [-n max_increments] [-x]");
+        logger("usage: eatcore [-i interval_in_seconds] [-s increment_in_bytes] [-n max_increments] [-x] [-r]");
         exit(1);
 		}
 	}
@@ -78,7 +87,11 @@ void increment(struct context* ctx) {
   if (ctx->p) {
     ctx->size = newsize;
     logger("Stomach fed to %zuMB. Touching pages...", ctx->size/1048576);
-    bzero(ctx->p, ctx->size);
+    if (ctx->random) {
+      arc4random_buf(ctx->p, ctx->size);
+    } else {
+      bzero(ctx->p, ctx->size);
+    }
     logger("Finished touching pages. Sleeping %d seconds.", (int) ctx->interval);
     ctx->current_increments++;
   } else {
@@ -99,7 +112,7 @@ int main(int argc, char** argv) {
 	struct context ctx;
 	set_defaults(&ctx,argc,argv);
 	parse_commandline(&ctx);
-	logger("Starting with interval=%d, increment=%d, max_increments=%d",
-    (int) ctx.interval, (int) ctx.increment, (int) ctx.max_increments);
+	logger("Starting with interval=%d, increment=%d, max_increments=%d, random=%d",
+    (int) ctx.interval, (int) ctx.increment, (int) ctx.max_increments, ctx.random);
 	eatcore(&ctx);
 }
