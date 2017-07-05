@@ -3,7 +3,8 @@ ADD . /eatcore
 WORKDIR /eatcore
 RUN \
   apk update \
-  && apk add --virtual .build-deps gcc make musl-dev \
+  && apk add libbsd \
+  && apk add --virtual .build-deps gcc make musl-dev libbsd-dev \
   && make clean install \
   && apk del .build-deps
 
