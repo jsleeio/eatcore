@@ -1,4 +1,10 @@
-CFLAGS=-Wall -Werror
+CFLAGS=-Wall
+OS := $(shell uname -s)
+ifeq ($(OS),Linux)
+	LDLIBS += -lbsd
+	CFLAGS += -DLINUX
+endif
+
 eatcore: eatcore.c
 
 docker: clean
@@ -9,3 +15,6 @@ install: eatcore
 
 clean:
 	$(RM) eatcore
+
+test:
+	echo $(shell uname -s)
