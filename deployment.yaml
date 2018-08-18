@@ -16,8 +16,7 @@ spec:
         k8s-app: eatcore
     spec:
       containers:
-# sorry I have not pushed a public image anywhere yet
-        - image: 'your_repo_here'
+        - image: gcr.io/jsleeio-containers/eatcore:latest
           imagePullPolicy: IfNotPresent
           name: eatcore
           args:
