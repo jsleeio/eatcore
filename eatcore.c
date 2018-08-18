@@ -11,7 +11,7 @@
 
 #define logger(fmt, ...) fprintf(stderr, "%ld eatcore: " fmt "\n", (long) time(NULL), ## __VA_ARGS__)
 
-#define VERSION "0.2.0"
+#define VERSION "0.2.1"
 
 struct context {
   char **argv;

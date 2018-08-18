@@ -33,6 +33,6 @@ operating system kernels.
 
 ## License
 
-Copyright 2017 SiteMinder.
+Copyright 2018 SiteMinder.
 
 This software is released under the terms of the [MIT license](https://opensource.org/licenses/MIT).
