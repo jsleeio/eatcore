@@ -20,7 +20,6 @@ spec:
           imagePullPolicy: IfNotPresent
           name: eatcore
           args:
-          - '/usr/local/bin/eatcore'
 # exit if maximum increments reached successfully
           - '-x'
 # every 60 seconds
