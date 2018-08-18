@@ -16,7 +16,7 @@ spec:
         k8s-app: eatcore
     spec:
       containers:
-        - image: gcr.io/jsleeio-containers/eatcore:latest
+        - image: gcr.io/jsleeio-containers/eatcore:v0.2.1
           imagePullPolicy: IfNotPresent
           name: eatcore
           args:
