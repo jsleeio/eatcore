@@ -7,11 +7,20 @@ Kubernetes clusters. We were having some very strange problems with networking
 under memory pressure and wanted to be able to reproduce the problems
 on-demand.
 
+Don't run this in your production Kubernetes cluster without running it
+somewhere else first and observing the behaviour! If you really must, maybe
+consider constraining it to some nodes that aren't running anything you care
+about.
+
 ## How do I use it?
 
 Included in this repo is an example Kubernetes `Deployment` definition, and
-also a `Dockerfile`. As we've not yet pushed an image anywhere, you will need
-to push one to your own repository and edit the definition to point at it.
+also a `Dockerfile`.
+
+```
+$ cat deployment.yaml ## understand what it will do first!
+$ kubectl create -f deployment.yaml
+```
 
 ### CLI options
 
