@@ -16,6 +16,7 @@ spec:
         k8s-app: eatcore
     spec:
       containers:
+# this is no longer a valid image reference; you'll need to provide your own
         - image: gcr.io/jsleeio-containers/eatcore:v0.2.1
           imagePullPolicy: IfNotPresent
           name: eatcore
