@@ -8,7 +8,7 @@ endif
 eatcore: eatcore.c
 
 docker: clean
-	docker build -t eatcore -f Dockerfile.eatcore .
+	docker build -t eatcore -f Dockerfile .
 
 install: eatcore
 	cp eatcore /usr/local/bin
