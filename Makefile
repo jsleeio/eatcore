@@ -16,8 +16,5 @@ install: eatcore
 clean:
 	$(RM) eatcore
 
-test:
-	echo $(shell uname -s)
-
 indent:
 	gindent -nut -i2 -kr eatcore.c
