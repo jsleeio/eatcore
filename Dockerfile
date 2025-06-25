@@ -1,5 +1,5 @@
 FROM alpine:3 AS build
-RUN apk add llvm clang libbsd-dev make 
+RUN apk add clang libbsd-dev make 
 ADD . /eatcore
 WORKDIR /eatcore
 RUN make
