@@ -12,6 +12,5 @@ LABEL org.opencontainers.image.licenses=MIT
 WORKDIR /
 COPY --from=build /eatcore/eatcore /eatcore
 COPY --from=build /lib/ld-musl-* /lib/
-COPY --from=build /usr/lib/libmd*so* /usr/lib/
-COPY --from=build /usr/lib/libbsd*so* /usr/lib/
+COPY --from=build ["/usr/lib/libbsd*so*", "/usr/lib/libmd*so*", "/usr/lib/"]
 ENTRYPOINT ["/eatcore"]
