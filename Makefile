@@ -17,4 +17,4 @@ clean:
 	$(RM) eatcore
 
 indent:
-	gindent -nut -i2 -l90 -hnl -kr eatcore.c
+	gindent -linux -hnl -l110 eatcore.c
