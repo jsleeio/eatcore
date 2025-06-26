@@ -24,7 +24,9 @@ $ kubectl create -f deployment.yaml
 
 ### CLI options
 
-`eatcore` has three key controls:
+`eatcore` has four key controls:
+
+* `-b 96`: allocate+fill 96MB of memory once at startup
 
 * `-s 500`: allocate+fill 500MiB of memory per cycle
 
